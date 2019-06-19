@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Menu from './Menu';
 import App from './App';
-import Places from './Places';
+import Gallery from './Gallery';
 import Contacts from './Contacts';
 
 const routing = (
@@ -11,7 +11,7 @@ const routing = (
         <Menu />
         <Switch>
             <Route exact path='/' component={App} />
-            <Route exact path='/places' component={Places} />
+            <Route exact path='/gallery' component={Gallery} />
             <Route exact path='/contacts' component={Contacts} />
         </Switch>
     </Router>

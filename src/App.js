@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
-import AwesomeSlider from 'react-awesome-slider';
-import AwsSliderStyles from 'react-awesome-slider/src/styles.scss';
+import { Slide } from 'react-slideshow-image';
+import 'bootstrap/dist/css/bootstrap.css';
+
+const slideImages = [
+    'data/slider-image-1.jpg',
+    'data/slider-image-2.jpg',
+    'data/slider-image-3.jpg'
+];
+
+const properties = {
+    duration: 1500,
+    transitionDuration: 1000,
+    infinite: true,
+    indicators: true,
+    arrows: true
+};
 
 class App extends Component {
     componentDidMount() {
@@ -9,12 +23,19 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <AwesomeSlider cssModule={styles}>
-                    <div data-src='/path/to/image-0.png' />
-                    <div data-src='/path/to/image-1.png' />
-                    <div data-src='/path/to/image-2.jpg' />
-                </AwesomeSlider>
+            <div className='container'>
+                <Slide {...properties}>
+                    {slideImages.map((image, i) => (
+                        <div key={`slider-image-${i}`} className='each-slide'>
+                            <div
+                                style={{
+                                    backgroundImage: `url(${image})`,
+                                    height: '700px'
+                                }}
+                            />
+                        </div>
+                    ))}
+                </Slide>
             </div>
         );
     }
