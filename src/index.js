@@ -8,6 +8,8 @@ import Gallery from './Gallery';
 import Sorting from './Sorting';
 import Contacts from './Contacts';
 
+require('dotenv').config();
+
 const routing = (
     <Router>
         <Menu />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import { geolocated } from 'react-geolocated';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { Button, Form, FormControl } from 'react-bootstrap';
 import {
     ListGroup,
@@ -19,14 +20,18 @@ class Tile extends Component {
     render() {
         const centre = this.props.data;
         return (
-            <ListGroupItem>
-                <ListGroupItemHeading>{centre.location}</ListGroupItemHeading>
-                <ListGroupItemText>
-                    Acceptable materials: <i>{centre.types.join(', ')}</i>
-                    <br />
-                    Distance: {parseInt(centre.distance)} meters
-                </ListGroupItemText>
-            </ListGroupItem>
+            <div>
+                <ListGroupItem>
+                    <ListGroupItemHeading>
+                        {centre.location}
+                    </ListGroupItemHeading>
+                    <ListGroupItemText>
+                        Acceptable materials: <i>{centre.types.join(', ')}</i>
+                        <br />
+                        Distance: {parseInt(centre.distance)} meters
+                    </ListGroupItemText>
+                </ListGroupItem>
+            </div>
         );
     }
 }
@@ -37,6 +42,7 @@ class Sorting extends Component {
 
         this.perPage = 4;
         this.state = {
+            mapPosition: null,
             searchRequest: '',
             sortByDistance: 0,
             filtered: null,
@@ -53,6 +59,7 @@ class Sorting extends Component {
         this._handleCheckBoxChange = this._handleCheckBoxChange.bind(this);
         this._handleSortButtonClick = this._handleSortButtonClick.bind(this);
         this._handleSearchInput = this._handleSearchInput.bind(this);
+        this._handleTileClick = this._handleTileClick.bind(this);
     }
 
     componentDidUpdate() {
@@ -76,12 +83,15 @@ class Sorting extends Component {
                 {this._renderBreadcrubms()}
                 <div className='container'>
                     {!this.props.coords ? (
-                        <h1>Sorry enable please geolocation</h1>
+                        <p>Sorry enable please geolocation</p>
                     ) : this.state.centres ? (
                         <div>
                             {this._renderControls()}
                             {this._renderCheckboxes()}
-                            {this._renderList()}
+                            <div className='row'>
+                                {this._renderList()}
+                                {this._renderMap()}
+                            </div>
                             {this._renderPagination()}
                         </div>
                     ) : (
@@ -155,6 +165,16 @@ class Sorting extends Component {
         this.setState({ searchRequest: e.target.value });
     }
 
+    _handleTileClick(e) {
+        const centre = this.state.centres.find(
+            x => x.location === e.target.innerText
+        );
+        if (centre)
+            this.setState({
+                mapPosition: { lat: centre.latitude, lng: centre.longitude }
+            });
+    }
+
     _renderControls() {
         return (
             <div className='row'>
@@ -206,16 +226,23 @@ class Sorting extends Component {
                     element.location.indexOf(this.state.searchRequest) !== -1
             );
 
-        if (this.filtered.length === 0) return <h1>List is empty</h1>;
+        if (this.filtered.length === 0) return <p>List is empty</p>;
 
         return (
-            <ListGroup>
-                {this.filtered
-                    .slice(start, start + this.perPage)
-                    .map((centre, i) => (
-                        <Tile key={centre.location + i} data={centre} />
-                    ))}
-            </ListGroup>
+            <div className='col'>
+                <ListGroup>
+                    {this.filtered
+                        .slice(start, start + this.perPage)
+                        .map(centre => (
+                            <div
+                                key={centre.location}
+                                onClick={this._handleTileClick}
+                            >
+                                <Tile data={centre} />
+                            </div>
+                        ))}
+                </ListGroup>
+            </div>
         );
     }
 
@@ -279,11 +306,34 @@ class Sorting extends Component {
             </div>
         );
     }
+
+    _renderMap() {
+        if (!this.state.mapPosition) return;
+        return (
+            <div className='col'>
+                <Map
+                    google={this.props.google}
+                    zoom={12}
+                    initialCenter={{
+                        lat: this.props.coords.latitude,
+                        lng: this.props.coords.longitude
+                    }}
+                >
+                    <Marker position={this.state.mapPosition} />
+                </Map>
+            </div>
+        );
+    }
 }
 
-export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: false
-    },
-    userDecisionTimeout: 5000
-})(Sorting);
+export default GoogleApiWrapper({
+    apiKey:
+        process.env.GMAPS_APIKEY || 'AIzaSyBz6Vmyp-xtwUQycFHNL8CJ7gCLnUpbcsY'
+})(
+    geolocated({
+        positionOptions: {
+            enableHighAccuracy: false
+        },
+        userDecisionTimeout: 5000
+    })(Sorting)
+);

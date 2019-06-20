@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, Form } from 'react-bootstrap';
+import { GoogleLogin } from 'react-google-login';
 
-import 'bootstrap/dist/css/bootstrap.css';
+const responseGoogle = response => {
+    console.log(response);
+};
 
 export default class Menu extends Component {
     render() {
@@ -29,6 +32,15 @@ export default class Menu extends Component {
                             <Nav.Link>CONTACTS</Nav.Link>
                         </LinkContainer>
                     </Nav>
+                    <Form inline>
+                        <GoogleLogin
+                            clientId='349786374195-8q7j1q1c251rvp0pmmcgkhmm5m736mlc.apps.googleusercontent.com'
+                            buttonText='Login'
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </Form>
                 </Navbar.Collapse>
             </Navbar>
         );
