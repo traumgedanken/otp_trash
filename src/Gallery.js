@@ -14,7 +14,7 @@ export default class Gallery extends Component {
 
     componentDidMount() {
         fetch(
-            `https://cors-anywhere.herokuapp.com/https://otp-trash.herokuapp.com/images`
+            `https://cors-anywhere.herokuapp.com/https://otp-trash-server.herokuapp.com/images`
         )
             .then(res => res.json())
             .then(images => this.setState({ images }));

@@ -65,7 +65,7 @@ class Sorting extends Component {
     componentDidUpdate() {
         if (!this.state.centres && this.props.coords)
             fetch(
-                `https://cors-anywhere.herokuapp.com/https://otp-trash.herokuapp.com/sorting`
+                `https://cors-anywhere.herokuapp.com/https://otp-trash-server.herokuapp.com/sorting`
             )
                 .then(res => res.json())
                 .then(centres => {
