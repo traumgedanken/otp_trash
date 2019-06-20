@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default class Menu extends Component {

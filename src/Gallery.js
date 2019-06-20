@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+
 import MyLoader from './Loader';
 import Breadcrumbs from './Breadcrumbs';
-import 'bootstrap/dist/css/bootstrap.css';
 import './styles/Gallery.scss';
 
 export default class Gallery extends Component {

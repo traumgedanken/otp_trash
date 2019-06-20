@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
 import './styles/Breadcrumbs.css';
 
 export default class BreadCrumbs extends Component {

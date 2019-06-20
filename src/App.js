@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Slide } from 'react-slideshow-image';
 import 'bootstrap/dist/css/bootstrap.css';
+
 import Breadcrumbs from './Breadcrumbs';
 
 const slideImages = [
@@ -24,7 +25,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className='main'>
                 <Breadcrumbs data={[{ link: '/', name: 'HOME' }]} />
 
                 <div className='container'>
@@ -37,7 +38,7 @@ export default class App extends Component {
                                 <div
                                     style={{
                                         backgroundImage: `url(${image})`,
-                                        height: '700px'
+                                        height: '600px'
                                     }}
                                 />
                             </div>

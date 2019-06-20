@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+
 import Menu from './Menu';
 import App from './App';
 import Gallery from './Gallery';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import { geolocated } from 'react-geolocated';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormControl } from 'react-bootstrap';
 import {
     ListGroup,
     ListGroupItem,
@@ -37,6 +37,7 @@ class Sorting extends Component {
 
         this.perPage = 4;
         this.state = {
+            searchRequest: '',
             sortByDistance: 0,
             filtered: null,
             centres: null,
@@ -51,10 +52,11 @@ class Sorting extends Component {
         this._handlePageClick = this._handlePageClick.bind(this);
         this._handleCheckBoxChange = this._handleCheckBoxChange.bind(this);
         this._handleSortButtonClick = this._handleSortButtonClick.bind(this);
+        this._handleSearchInput = this._handleSearchInput.bind(this);
     }
 
     componentDidUpdate() {
-        if (!this.state.centres)
+        if (!this.state.centres && this.props.coords)
             fetch(
                 `https://cors-anywhere.herokuapp.com/https://otp-trash.herokuapp.com/sorting`
             )
@@ -70,24 +72,22 @@ class Sorting extends Component {
 
     render() {
         return (
-            <div>
+            <div className='main'>
                 {this._renderBreadcrubms()}
-                {this.state.centres ? (
-                    <div className='main container'>
-                        <Button
-                            variant='outline-dark'
-                            size='sm'
-                            onClick={this._handleSortButtonClick}
-                        >
-                            Sort by distanse
-                        </Button>
-                        {this._renderCheckboxes()}
-                        {this._renderList()}
-                        {this._renderPagination()}
-                    </div>
-                ) : (
-                    <MyLoader />
-                )}
+                <div className='container'>
+                    {!this.props.coords ? (
+                        <h1>Sorry enable please geolocation</h1>
+                    ) : this.state.centres ? (
+                        <div>
+                            {this._renderControls()}
+                            {this._renderCheckboxes()}
+                            {this._renderList()}
+                            {this._renderPagination()}
+                        </div>
+                    ) : (
+                        <MyLoader />
+                    )}
+                </div>
             </div>
         );
     }
@@ -151,6 +151,35 @@ class Sorting extends Component {
         this.setState({ sortByDistance: newSortValue });
     }
 
+    _handleSearchInput(e) {
+        this.setState({ searchRequest: e.target.value });
+    }
+
+    _renderControls() {
+        return (
+            <div className='row'>
+                <div className='col'>
+                    <Button
+                        variant='outline-dark'
+                        onClick={this._handleSortButtonClick}
+                    >
+                        Sort by distanse
+                    </Button>
+                </div>
+                <div className='col'>
+                    <Form inline>
+                        <FormControl
+                            onInput={this._handleSearchInput}
+                            type='text'
+                            placeholder='Search'
+                            className='mr-sm-2'
+                        />
+                    </Form>
+                </div>
+            </div>
+        );
+    }
+
     _renderPagination() {
         if (!this.filtered) return;
         return (
@@ -168,9 +197,17 @@ class Sorting extends Component {
 
     _renderList() {
         const start = this.state.activePage * this.perPage;
-        this.filtered = this._filter().sort(
-            (a, b) => this.state.sortByDistance * (a.distance - b.distance)
-        );
+        this.filtered = this._filter()
+            .sort(
+                (a, b) => this.state.sortByDistance * (a.distance - b.distance)
+            )
+            .filter(
+                element =>
+                    element.location.indexOf(this.state.searchRequest) !== -1
+            );
+
+        if (this.filtered.length === 0) return <h1>List is empty</h1>;
+
         return (
             <ListGroup>
                 {this.filtered

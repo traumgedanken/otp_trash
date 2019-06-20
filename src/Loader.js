@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
+
 import './styles/Loader.css';
 
 export default class MyLoader extends Component {

@@ -11,6 +11,8 @@
 }
 
 .pagination a {
+    cursor: pointer;
+    outline: none;
     color: black;
     float: left;
     padding: 8px 16px;
