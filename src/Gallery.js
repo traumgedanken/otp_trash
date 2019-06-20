@@ -4,7 +4,7 @@ import Breadcrumbs from './Breadcrumbs';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/Gallery.scss';
 
-class Gallery extends Component {
+export default class Gallery extends Component {
     constructor(props) {
         super(props);
 
@@ -25,8 +25,12 @@ class Gallery extends Component {
                 <Breadcrumbs
                     data={[
                         { link: '/', name: 'HOME' },
-                        { link: '/', name: 'GALLERY' },
-                        { link: '/gallery/voluntary', name: 'VOLUNTARY' }
+                        {
+                            link: '/activity/gallery',
+                            name: 'ACTIVITY',
+                            disabled: true
+                        },
+                        { link: '/activity/gallery', name: 'GALLERY' }
                     ]}
                 />
                 {this.state.images ? (
@@ -128,5 +132,3 @@ class Tile extends React.Component {
         );
     }
 }
-
-export default Gallery;

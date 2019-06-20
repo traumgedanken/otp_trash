@@ -3,7 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class Menu extends Component {
+export default class Menu extends Component {
     render() {
         return (
             <Navbar bg='light' expand='lg' fixed='top'>
@@ -16,11 +16,11 @@ class Menu extends Component {
                         <LinkContainer to='/'>
                             <Nav.Link>HOME</Nav.Link>
                         </LinkContainer>
-                        <NavDropdown title='GALLERY' id='basic-nav-dropdown'>
-                            <LinkContainer to='/gallery/voluntary'>
-                                <NavDropdown.Item>VOLUNTARY</NavDropdown.Item>
+                        <NavDropdown title='ACTIVITY' id='basic-nav-dropdown'>
+                            <LinkContainer to='/activity/gallery'>
+                                <NavDropdown.Item>GALLERY</NavDropdown.Item>
                             </LinkContainer>
-                            <LinkContainer to='/gallery/sorting'>
+                            <LinkContainer to='/activity/sorting'>
                                 <NavDropdown.Item>SORTING</NavDropdown.Item>
                             </LinkContainer>
                         </NavDropdown>
@@ -33,5 +33,3 @@ class Menu extends Component {
         );
     }
 }
-
-export default Menu;

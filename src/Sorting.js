@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import Breadcrumbs from './Breadcrumbs';
 
-export default class Contacts extends Component {
-    componentDidMount() {
-        document.title = 'CONTACTS';
-    }
-
+export default class Sorting extends Component {
     render() {
         return (
             <div>
                 <Breadcrumbs
                     data={[
                         { link: '/', name: 'HOME' },
-                        { link: '/contacts', name: 'CONTACTS' }
+                        {
+                            link: '/activity/sorting',
+                            name: 'ACTIVITY',
+                            disabled: true
+                        },
+                        { link: '/activity/sorting', name: 'SORTING' }
                     ]}
                 />
             </div>

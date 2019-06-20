@@ -10,7 +10,10 @@ export default class BreadCrumbs extends Component {
                 {this.props.data.map((crumb, i, arr) => (
                     <LinkContainer key={crumb.name} to={crumb.link}>
                         <BreadcrumbItem
-                            className={i === arr.length - 1 ? 'active-item' : ''}
+                            className={
+                                (i === arr.length - 1 ? 'active-item' : '') +
+                                (crumb.disabled ? 'disabled-item' : '')
+                            }
                             tag='span'
                         >
                             {crumb.name}

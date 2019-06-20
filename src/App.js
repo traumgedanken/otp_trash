@@ -17,7 +17,7 @@ const properties = {
     arrows: true
 };
 
-class App extends Component {
+export default class App extends Component {
     componentDidMount() {
         document.title = 'TRASH';
     }
@@ -48,5 +48,3 @@ class App extends Component {
         );
     }
 }
-
-export default App;

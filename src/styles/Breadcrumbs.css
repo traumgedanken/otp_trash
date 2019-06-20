@@ -1,9 +1,14 @@
 .breadcrumb-item {
     font-size: 10px;
+    text-decoration: underline;
 }
 
-.active-item {
-    text-decoration: underline;
+span.active-item.active {
+    color: black;
+}
+
+.disabled-item {
+    text-decoration: none;
 }
 
 .breadcrumb {
