@@ -57,11 +57,7 @@ export default class Menu extends Component {
                 <Navbar.Text>
                     {this.state.user.name}
                     <img
-                        style={{
-                            width: '40px',
-                            borderRadius: '40px',
-                            marginLeft: '5px'
-                        }}
+                        className='user-image'
                         alt='user avatar'
                         src={this.state.user.imageUrl}
                     />
