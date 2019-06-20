@@ -3,16 +3,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Gallery.scss';
 
 const data = [
-    'data/collecting-1.jpg',
-    'data/collecting-2.jpg',
-    'data/collecting-3.jpg',
-    'data/collecting-4.jpg',
-    'https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=3c55430f01fe9ac9a9ccb3383d1416ff',
-    'https://images.unsplash.com/photo-1467890947394-8171244e5410?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=9396f0adf263b51b44626228225684d0',
-    'https://images.unsplash.com/photo-1429091443922-e7d9ae79a837?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=e81cb6a60c53788559edb9bec21b80fc',
-    'https://images.unsplash.com/photo-1468245856972-a0333f3f8293?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=1f57cc13084e32839627453821a43abf',
-    'https://images.unsplash.com/photo-1427392797425-39090deb14ec?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=8bfe49466d0da200e61128a8ab0e8fbe',
-    'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05'
+    '../data/collecting-1.jpg',
+    '../data/collecting-2.jpg',
+    '../data/collecting-3.jpg',
+    '../data/collecting-4.jpg',
+    '../data/collecting-5.jpg',
+    '../data/collecting-6.jpg',
+    '../data/collecting-7.jpg',
+    '../data/collecting-8.jpg',
+    '../data/collecting-9.jpg'
 ];
 
 class Gallery extends Component {
@@ -83,11 +82,9 @@ class Tile extends React.Component {
             tileStyle = {
                 width: '730px',
                 position: 'absolute',
-                top: '38%',
-                left: '60%',
-                margin: '0',
-                marginTop: '-31vw',
-                marginLeft: '-31vw',
+                margin: 0,
+                top: `${40 + Math.floor(this.props.data.index / 3) * 320}px`,
+                left: `${(window.innerWidth - 730) / 2}px`,
                 boxShadow: '0 0 40px 5px rgba(0, 0, 0, 0.3)',
                 transform: 'none'
             };

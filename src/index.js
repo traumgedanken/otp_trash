@@ -11,7 +11,7 @@ const routing = (
         <Menu />
         <Switch>
             <Route exact path='/' component={App} />
-            <Route exact path='/gallery' component={Gallery} />
+            <Route exact path='/gallery/voluntary' component={Gallery} />
             <Route exact path='/contacts' component={Contacts} />
         </Switch>
     </Router>

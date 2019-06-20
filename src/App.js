@@ -9,12 +9,13 @@ const slideImages = [
 ];
 
 const properties = {
-    duration: 1500,
-    transitionDuration: 1000,
+    duration: 1000,
+    transitionDuration: 1500,
     infinite: true,
     indicators: true,
     arrows: true
 };
+
 
 class App extends Component {
     componentDidMount() {

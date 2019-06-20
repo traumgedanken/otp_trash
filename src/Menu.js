@@ -1,49 +1,35 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Menu extends Component {
     render() {
         return (
-            <nav className='navbar fixed-top navbar-expand-lg navbar-light bg-light'>
-                <Link className='navbar-brand' to='/'>
-                    TRASH
-                </Link>
-                <button
-                    className='navbar-toggler'
-                    type='button'
-                    data-toggle='collapse'
-                    data-target='#navbarSupportedContent'
-                    aria-controls='navbarSupportedContent'
-                    aria-expanded='false'
-                    aria-label='Toggle navigation'
-                >
-                    <span className='navbar-toggler-icon' />
-                </button>
-
-                <div
-                    className='collapse navbar-collapse'
-                    id='navbarSupportedContent'
-                >
-                    <ul className='navbar-nav mr-auto'>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to='/'>
-                                HOME
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to='/gallery'>
-                                GALLERY
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to='/contacts'>
-                                CONTACTS
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <Navbar bg='light' expand='lg' fixed='top'>
+                <LinkContainer to='/'>
+                    <Navbar.Brand>TRASH</Navbar.Brand>
+                </LinkContainer>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='mr-auto'>
+                        <LinkContainer to='/'>
+                            <Nav.Link>HOME</Nav.Link>
+                        </LinkContainer>
+                        <NavDropdown title='GALLERY' id='basic-nav-dropdown'>
+                            <LinkContainer to='/gallery/voluntary'>
+                                <NavDropdown.Item>VOLUNTARY</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/gallery/sorting'>
+                                <NavDropdown.Item>SORTING</NavDropdown.Item>
+                            </LinkContainer>
+                        </NavDropdown>
+                        <LinkContainer to='/contacts'>
+                            <Nav.Link>CONTACTS</Nav.Link>
+                        </LinkContainer>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }
