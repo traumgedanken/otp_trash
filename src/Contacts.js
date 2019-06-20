@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import Breadcrumbs from './Breadcrumbs';
 
 class Contacts extends Component {
     componentDidMount() {
@@ -7,7 +8,16 @@ class Contacts extends Component {
     }
 
     render() {
-        return <div className='container'>Contacts Page</div>;
+        return (
+            <div>
+                <Breadcrumbs
+                    data={[
+                        { link: '/', name: 'HOME' },
+                        { link: '/contacts', name: 'CONTACTS' }
+                    ]}
+                />
+            </div>
+        );
     }
 }
 

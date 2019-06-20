@@ -1,0 +1,14 @@
+.breadcrumb-item {
+    font-size: 10px;
+}
+
+.active-item {
+    text-decoration: underline;
+}
+
+.breadcrumb {
+    position: fixed;
+    top: 60px;
+    background-color: white;
+    padding: 3px 30px;
+}

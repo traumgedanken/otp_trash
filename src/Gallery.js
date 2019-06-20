@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
+import MyLoader from './Loader';
+import Breadcrumbs from './Breadcrumbs';
 import 'bootstrap/dist/css/bootstrap.css';
-import './Gallery.scss';
-
-const data = [
-    '../data/collecting-1.jpg',
-    '../data/collecting-2.jpg',
-    '../data/collecting-3.jpg',
-    '../data/collecting-4.jpg',
-    '../data/collecting-5.jpg',
-    '../data/collecting-6.jpg',
-    '../data/collecting-7.jpg',
-    '../data/collecting-8.jpg',
-    '../data/collecting-9.jpg'
-];
+import './styles/Gallery.scss';
 
 class Gallery extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { images: null };
+    }
+
+    componentDidMount() {
+        fetch(
+            `https://cors-anywhere.herokuapp.com/https://otp-trash.herokuapp.com/images`
+        )
+            .then(res => res.json())
+            .then(images => this.setState({ images }));
+    }
+
     render() {
-        return <Tiles data={data} />;
+        return (
+            <div>
+                <Breadcrumbs
+                    data={[
+                        { link: '/', name: 'HOME' },
+                        { link: '/', name: 'GALLERY' },
+                        { link: '/gallery/voluntary', name: 'VOLUNTARY' }
+                    ]}
+                />
+                {this.state.images ? (
+                    <Tiles data={this.state.images} />
+                ) : (
+                    <MyLoader />
+                )}
+            </div>
+        );
     }
 }
 
