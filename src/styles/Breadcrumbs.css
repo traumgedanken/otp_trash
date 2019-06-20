@@ -13,7 +13,7 @@ span.active-item.active {
 
 .breadcrumb {
     position: fixed;
-    top: 60px;
+    top: 70px;
     background-color: white;
     padding: 3px 30px;
 }
